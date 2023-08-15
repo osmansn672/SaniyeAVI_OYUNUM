@@ -1,9 +1,9 @@
-// src/components/Game.js
+ // src/components/Game.js
 import React, { useState, useEffect } from "react";
 import "./Game.css";
 
 const Game = () => {
-  const maxRounds = 3;
+  const totalRounds = 8;
   const maxDuration = 5; // saniye
   const [round, setRound] = useState(1);
   const [timeLeft, setTimeLeft] = useState(maxDuration);
@@ -11,9 +11,10 @@ const Game = () => {
   const [isGameOver, setIsGameOver] = useState(false);
   const [scores, setScores] = useState([]);
   const [totalScore, setTotalScore] = useState(0);
+  const [backgroundColor, setBackgroundColor] = useState("#f0f0f0");
 
   useEffect(() => {
-    if (round <= maxRounds) {
+    if (round <= totalRounds) {
       startRound();
     } else {
       endGame();
@@ -36,12 +37,22 @@ const Game = () => {
     setTotalScore(sum);
   }, [scores]);
 
+  const getRandomColor = () => {
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  };
+
   const startRound = () => {
     setTimeLeft(maxDuration);
     setButtonPosition({
       top: Math.random() * (window.innerHeight - 50),
       left: Math.random() * (window.innerWidth - 100)
     });
+    setBackgroundColor(getRandomColor());
   };
 
   const endRound = () => {
@@ -59,20 +70,23 @@ const Game = () => {
     setIsGameOver(false);
     setScores([]);
     setTotalScore(0);
+    setBackgroundColor("#f0f0f0");
   };
 
   return (
-    <div className="game-container">
+    <div className="game-container" style={{ backgroundColor }}>
+      <div className="score-bar">
+        <p>Toplam Skor: {totalScore}</p>
+      </div>
       {isGameOver ? (
         <div className="score-container">
           <h2>Oyun Bitti</h2>
           <p>Puanlar: {scores.join(", ")}</p>
-          <p>Toplam Skor: {totalScore}</p>
           <button onClick={restartGame}>Yeniden Başlat</button>
         </div>
       ) : (
         <div className="round-container">
-          <h2>Round {round}</h2>
+          <h2>Raunt {round}</h2>
           <p>Kalan Süre: {timeLeft} saniye</p>
           <button
             style={{ top: buttonPosition.top, left: buttonPosition.left }}
