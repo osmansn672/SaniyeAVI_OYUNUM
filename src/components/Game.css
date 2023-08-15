@@ -46,12 +46,27 @@ button:hover {
 .score-container p {
   font-size: 18px;
 }
-Bu güncelleme sonrasında, oyun toplamda 8 raunt oynandıktan sonra oyunun sona erdiğini gösterecektir. Umarım bu değişiklikler beklentinizi karşılar!
+Bu güncelleme sonrasında,
+oyun
+  toplamda
+  8
+  raunt
+  oynandıktan
+  sonra
+  oyunun
+  sona
+  erdiğini
+  gösterecektir.
+  Umarım
+  bu
+  değişiklikler
+  beklentinizi
+  karşılar!
+  .score-container {
+  /* Diğer stil kuralları */
+  margin-top: 20px;
+}
 
-
-
-
-
-
-
-
+.score-container p {
+  font-size: 18px;
+}
